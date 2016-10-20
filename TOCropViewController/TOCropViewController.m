@@ -234,13 +234,15 @@
         frame.origin.x = 0.0f;
         
         if (self.toolbarPosition == TOCropViewControllerToolbarPositionBottom) {
-            frame.origin.y = CGRectGetHeight(self.view.bounds) - 44.0f;
+            // Added by mbecker: Changed Bottom Height
+            frame.origin.y = CGRectGetHeight(self.view.bounds) - 101.0f;
         } else {
             frame.origin.y = 0;
         }
         
         frame.size.width = CGRectGetWidth(self.view.bounds);
-        frame.size.height = 44.0f;
+        // Added by mbecker: Changed Bottom Height
+        frame.size.height = 101.0f;
         
         // If the bar is at the top of the screen and the status bar is visible, account for the status bar height
         if (self.toolbarPosition == TOCropViewControllerToolbarPositionTop && self.prefersStatusBarHidden == NO) {
@@ -782,7 +784,7 @@
         });
     }
     //If the delegate that requires the specific cropped image is provided, call it
-    else if ([self.delegate respondsToSelector:@selector(cropViewController:didCropToImage:withRect:angle:)]) {
+    else if ([self.delegate respondsToSelector:@selector(cropViewController:original:didCropToImage:withRect:angle:)]) {
         UIImage *image = nil;
         if (angle == 0 && CGRectEqualToRect(cropFrame, (CGRect){CGPointZero, self.image.size})) {
             image = self.image;
@@ -793,7 +795,7 @@
         
         //dispatch on the next run-loop so the animation isn't interuppted by the crop operation
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.03f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.delegate cropViewController:self didCropToImage:image withRect:cropFrame angle:angle];
+            [self.delegate cropViewController:self original:self.image didCropToImage:image withRect:cropFrame angle:angle];
         });
     }
     else {

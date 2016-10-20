@@ -1456,18 +1456,25 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     
     //Work out the dimensions of the crop box when rotated
     CGRect newCropFrame = CGRectZero;
-    if (labs(self.angle) == labs(self.cropBoxLastEditedAngle) || (labs(self.angle)*-1) == ((labs(self.cropBoxLastEditedAngle) - 180) % 360)) {
-        newCropFrame.size = self.cropBoxLastEditedSize;
+    // Added by mbecker: Keep aspect ration when rotating
+    if (!self.aspectRatioLockEnabled) {
+        if (labs(self.angle) == labs(self.cropBoxLastEditedAngle) || (labs(self.angle)*-1) == ((labs(self.cropBoxLastEditedAngle) - 180) % 360)) {
+            newCropFrame.size = self.cropBoxLastEditedSize;
+            
+            self.scrollView.minimumZoomScale = self.cropBoxLastEditedMinZoomScale;
+            self.scrollView.zoomScale = self.cropBoxLastEditedZoomScale;
+        }
+        else {
+            newCropFrame.size = (CGSize){floorf(self.cropBoxFrame.size.height * scale), floorf(self.cropBoxFrame.size.width * scale)};
+            
+            //Re-adjust the scrolling dimensions of the scroll view to match the new size
+            self.scrollView.minimumZoomScale *= scale;
+            self.scrollView.zoomScale *= scale;
+        }
         
-        self.scrollView.minimumZoomScale = self.cropBoxLastEditedMinZoomScale;
-        self.scrollView.zoomScale = self.cropBoxLastEditedZoomScale;
-    }
-    else {
-        newCropFrame.size = (CGSize){floorf(self.cropBoxFrame.size.height * scale), floorf(self.cropBoxFrame.size.width * scale)};
+        newCropFrame.origin.x = floorf((CGRectGetWidth(self.bounds) - newCropFrame.size.width) * 0.5f);
+        newCropFrame.origin.y = floorf((CGRectGetHeight(self.bounds) - newCropFrame.size.height) * 0.5f);
         
-        //Re-adjust the scrolling dimensions of the scroll view to match the new size
-        self.scrollView.minimumZoomScale *= scale;
-        self.scrollView.zoomScale *= scale;
     }
     
     newCropFrame.origin.x = floorf((CGRectGetWidth(self.bounds) - newCropFrame.size.width) * 0.5f);
