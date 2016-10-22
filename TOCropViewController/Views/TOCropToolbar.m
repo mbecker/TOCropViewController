@@ -111,14 +111,14 @@
     [self addSubview:_doneIconButton];
     
     _cancelTextButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [_cancelTextButton setTitle:NSLocalizedStringFromTableInBundle(@"Cancel",
+    [_cancelTextButton setTitle:NSLocalizedStringFromTableInBundle(@"Back",
                                                                    @"TOCropViewControllerLocalizable",
                                                                    resourceBundle,
                                                                    nil)
                        forState:UIControlStateNormal];
     // Added by mbecker: Change cancel button color
     [_cancelTextButton.titleLabel setFont:[UIFont systemFontOfSize:17.0f]];
-    [_cancelTextButton setTitleColor:[UIColor colorWithHue:0.67 saturation:0.01 brightness:0.98 alpha:1.00] forState:UIControlStateNormal];
+    [_cancelTextButton setTitleColor:[UIColor colorWithRed:0.85 green:0.32 blue:0.36 alpha:1.00] forState:UIControlStateNormal]; // watermelon dark
     [_cancelTextButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     // Added by mbecker: Set background to clear
     [_cancelTextButton setBackgroundColor:[UIColor clearColor]];
@@ -133,7 +133,7 @@
     
     _clampButton = [UIButton buttonWithType:UIButtonTypeSystem];
     _clampButton.contentMode = UIViewContentModeCenter;
-    _clampButton.tintColor = [UIColor whiteColor];
+    _clampButton.tintColor = [UIColor blackColor];
     [_clampButton setImage:[TOCropToolbar clampImage] forState:UIControlStateNormal];
     [_clampButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     // Added by mbecker: Set background to clear
@@ -142,7 +142,7 @@
     
     _rotateCounterclockwiseButton = [UIButton buttonWithType:UIButtonTypeSystem];
     _rotateCounterclockwiseButton.contentMode = UIViewContentModeCenter;
-    _rotateCounterclockwiseButton.tintColor = [UIColor whiteColor];
+    _rotateCounterclockwiseButton.tintColor = [UIColor blackColor];
     [_rotateCounterclockwiseButton setImage:[TOCropToolbar rotateCCWImage] forState:UIControlStateNormal];
     [_rotateCounterclockwiseButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     // Added by mbecker: Set background to clear
@@ -151,7 +151,7 @@
     
     _resetButton = [UIButton buttonWithType:UIButtonTypeSystem];
     _resetButton.contentMode = UIViewContentModeCenter;
-    _resetButton.tintColor = [UIColor whiteColor];
+    _resetButton.tintColor = [UIColor blackColor];
     _resetButton.enabled = NO;
     [_resetButton setImage:[TOCropToolbar resetImage] forState:UIControlStateNormal];
     [_resetButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
@@ -597,7 +597,7 @@
     if (_rotateClockwiseButtonHidden == NO) {
         _rotateClockwiseButton = [UIButton buttonWithType:UIButtonTypeSystem];
         _rotateClockwiseButton.contentMode = UIViewContentModeCenter;
-        _rotateClockwiseButton.tintColor = [UIColor whiteColor];
+        _rotateClockwiseButton.tintColor = [UIColor blackColor];
         // Added by mbecker: Set background to clear
         [_rotateClockwiseButton setBackgroundColor:[UIColor clearColor]];
         [_rotateClockwiseButton setImage:[TOCropToolbar rotateCWImage] forState:UIControlStateNormal];
