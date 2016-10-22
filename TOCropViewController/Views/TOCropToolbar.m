@@ -64,7 +64,8 @@
 
 - (void)setup {
     // Added by mbecker. Updated background color of bottom container
-    self.backgroundColor = [UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00];
+    self.backgroundColor = [UIColor whiteColor];
+    //[UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00];
     
     _rotateClockwiseButtonHidden = YES;
     
