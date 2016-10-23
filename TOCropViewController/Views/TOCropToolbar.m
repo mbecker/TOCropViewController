@@ -106,26 +106,19 @@
     /* Done Text Button */
     
     _doneTextButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [_doneTextButton setTitle:NSLocalizedStringFromTableInBundle(@"Details",
-                                                                 @"TOCropViewControllerLocalizable",
-                                                                 resourceBundle,
-                                                                 nil)
-                     forState:UIControlStateNormal];
-    [_doneTextButton.titleLabel setFont:[UIFont systemFontOfSize:17.0f]];
+    [_doneTextButton.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:16]];
+    [_doneTextButton setTitle:NSLocalizedStringFromTableInBundle(@"Details", @"TOCropViewControllerLocalizable", resourceBundle, nil) forState:UIControlStateNormal];
     [_doneTextButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    // Added by mbecker: Updated color & Add image
-    [_doneTextButton setBackgroundColor:[UIColor clearColor]];
-    [_doneTextButton setTitleColor:[UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00] forState:UIControlStateNormal];
-    UIImage *btnImage = [TOCropToolbar loadImageFromResourceBundle:@"ic_chevron_right_36pt"];
-    [_doneTextButton setImage:btnImage forState:UIControlStateNormal];
-    
-    [_doneTextButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -80, 0, 0)];
-    [_doneTextButton setImageEdgeInsets:UIEdgeInsetsMake(0, 30, 0, 0)];
-    
+    [_doneTextButton setBackgroundColor:[UIColor clearColor]]; // Added by mbecker: Updated color & Add image
+    [_doneTextButton setTitleColor:[UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00] forState:UIControlStateNormal]; // Added by mbecker: Updated color & Add image
+    UIImage *btnImage = [TOCropToolbar loadImageFromResourceBundle:@"ic_chevron_right_36pt"]; // Added by mbecker: Updated color & Add image
+    [_doneTextButton setImage:btnImage forState:UIControlStateNormal]; // Added by mbecker: Updated color & Add image
+    [_doneTextButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -80, 0, 0)]; // Added by mbecker: Updated color & Add image
+    [_doneTextButton setImageEdgeInsets:UIEdgeInsetsMake(0, 30, 0, 0)]; // Added by mbecker: Updated color & Add image
     [self addSubview:_doneTextButton];
     
     
-    /* Cancel Icone Button */
+    /* Done Icone Button */
     
     _doneIconButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [_doneIconButton setImage:[TOCropToolbar doneImage] forState:UIControlStateNormal];
@@ -139,23 +132,12 @@
     /* Cancel Text Button */
     
     _cancelTextButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [_cancelTextButton setTitle:NSLocalizedStringFromTableInBundle(@"Back",
-                                                                   @"TOCropViewControllerLocalizable",
-                                                                   resourceBundle,
-                                                                   nil)
-                       forState:UIControlStateNormal];
-    [_cancelTextButton.titleLabel setFont:[UIFont systemFontOfSize:17.0f]];
-
+    [_cancelTextButton.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:16]];
+    [_cancelTextButton setTitle:NSLocalizedStringFromTableInBundle(@"Back", @"TOCropViewControllerLocalizable", resourceBundle, nil) forState:UIControlStateNormal];
     [_cancelTextButton setTitleColor:[UIColor colorWithRed:0.85 green:0.32 blue:0.36 alpha:1.00] forState:UIControlStateNormal]; // watermelon dark
-
-
     [_cancelTextButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    // Added by mbecker: Set background to clear
-    [_cancelTextButton setBackgroundColor:[UIColor clearColor]];
-    
-    // Updated by mbecker: COLOR
-    [_cancelTextButton setTitleColor:[UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00] forState:UIControlStateNormal];
-    
+    [_cancelTextButton setBackgroundColor:[UIColor clearColor]]; // Added by mbecker: Set background to clear
+    [_cancelTextButton setTitleColor:[UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00] forState:UIControlStateNormal]; // Updated by mbecker: COLOR
     [self addSubview:_cancelTextButton];
     
     
