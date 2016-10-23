@@ -94,12 +94,17 @@
                                                                  resourceBundle,
                                                                  nil)
                      forState:UIControlStateNormal];
-    
-    [_doneTextButton setTitleColor:[UIColor colorWithRed:0.10 green:0.71 blue:0.57 alpha:1.00] forState:UIControlStateNormal];
     [_doneTextButton.titleLabel setFont:[UIFont systemFontOfSize:17.0f]];
     [_doneTextButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     // Added by mbecker: Set background to clear
     [_doneTextButton setBackgroundColor:[UIColor clearColor]];
+    
+    // Updated by mbecker: COLOR
+    [_doneTextButton setTitleColor:[UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00] forState:UIControlStateNormal];
+    UIImage *btnImage = [UIImage imageNamed:@"ic_chevron_right_36pt "];
+    UIImage *btnImage2 = [UIImage imageNamed:@"images/ic_chevron_right_36pt"];
+    [_doneTextButton setImage:btnImage forState:UIControlStateNormal];
+    
     [self addSubview:_doneTextButton];
     
     _doneIconButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -111,17 +116,19 @@
     [self addSubview:_doneIconButton];
     
     _cancelTextButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [_cancelTextButton setTitle:NSLocalizedStringFromTableInBundle(@"Cancel",
+    [_cancelTextButton setTitle:NSLocalizedStringFromTableInBundle(@"Back",
                                                                    @"TOCropViewControllerLocalizable",
                                                                    resourceBundle,
                                                                    nil)
                        forState:UIControlStateNormal];
-    // Added by mbecker: Change cancel button color
     [_cancelTextButton.titleLabel setFont:[UIFont systemFontOfSize:17.0f]];
-    [_cancelTextButton setTitleColor:[UIColor colorWithHue:0.67 saturation:0.01 brightness:0.98 alpha:1.00] forState:UIControlStateNormal];
     [_cancelTextButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     // Added by mbecker: Set background to clear
     [_cancelTextButton setBackgroundColor:[UIColor clearColor]];
+    
+    // Updated by mbecker: COLOR
+    [_cancelTextButton setTitleColor:[UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00] forState:UIControlStateNormal];
+    
     [self addSubview:_cancelTextButton];
     
     _cancelIconButton = [UIButton buttonWithType:UIButtonTypeSystem];
