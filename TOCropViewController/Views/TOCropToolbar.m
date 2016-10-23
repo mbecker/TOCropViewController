@@ -62,6 +62,21 @@
     return self;
 }
 
++(NSBundle *)getResourcesBundle
+{
+    NSBundle *bundle = [NSBundle bundleWithURL:[[NSBundle bundleForClass:[self class]] URLForResource:@"Images" withExtension:@"bundle"]];
+    return bundle;
+}
+
+
++(UIImage *)loadImageFromResourceBundle:(NSString *)imageName
+{
+    NSBundle *bundle = [TOCropToolbar getResourcesBundle];
+    NSString *imageFileName = [NSString stringWithFormat:@"%@.png",imageName];
+    UIImage *image = [UIImage imageNamed:imageFileName inBundle:bundle compatibleWithTraitCollection:nil];
+    return image;
+}
+
 - (void)setup {
     // Added by mbecker. Updated background color of bottom container
     self.backgroundColor = [UIColor whiteColor];
@@ -88,27 +103,40 @@
         resourceBundle = classBundle;
     }
     
+    /* Done Text Button */
+    
     _doneTextButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [_doneTextButton setTitle:NSLocalizedStringFromTableInBundle(@"Next",
+    [_doneTextButton setTitle:NSLocalizedStringFromTableInBundle(@"Details",
                                                                  @"TOCropViewControllerLocalizable",
                                                                  resourceBundle,
                                                                  nil)
                      forState:UIControlStateNormal];
-    
-    [_doneTextButton setTitleColor:[UIColor colorWithRed:0.10 green:0.71 blue:0.57 alpha:1.00] forState:UIControlStateNormal];
     [_doneTextButton.titleLabel setFont:[UIFont systemFontOfSize:17.0f]];
     [_doneTextButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    // Added by mbecker: Set background to clear
+    // Added by mbecker: Updated color & Add image
     [_doneTextButton setBackgroundColor:[UIColor clearColor]];
+    [_doneTextButton setTitleColor:[UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00] forState:UIControlStateNormal];
+    UIImage *btnImage = [TOCropToolbar loadImageFromResourceBundle:@"ic_chevron_right_36pt"];
+    [_doneTextButton setImage:btnImage forState:UIControlStateNormal];
+    
+    [_doneTextButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -80, 0, 0)];
+    [_doneTextButton setImageEdgeInsets:UIEdgeInsetsMake(0, 30, 0, 0)];
+    
     [self addSubview:_doneTextButton];
+    
+    
+    /* Cancel Icone Button */
     
     _doneIconButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [_doneIconButton setImage:[TOCropToolbar doneImage] forState:UIControlStateNormal];
-    [_doneIconButton setTintColor:[UIColor colorWithRed:1.0f green:0.8f blue:0.0f alpha:1.0f]];
     [_doneIconButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    // Added by mbecker: Set background to clear
+    // Added by mbecker: Updated colors
     [_doneIconButton setBackgroundColor:[UIColor clearColor]];
+    [_doneIconButton setTintColor:[UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00]];
+    
     [self addSubview:_doneIconButton];
+    
+    /* Cancel Text Button */
     
     _cancelTextButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [_cancelTextButton setTitle:NSLocalizedStringFromTableInBundle(@"Back",
@@ -116,13 +144,22 @@
                                                                    resourceBundle,
                                                                    nil)
                        forState:UIControlStateNormal];
-    // Added by mbecker: Change cancel button color
     [_cancelTextButton.titleLabel setFont:[UIFont systemFontOfSize:17.0f]];
+<<<<<<< HEAD
     [_cancelTextButton setTitleColor:[UIColor colorWithRed:0.85 green:0.32 blue:0.36 alpha:1.00] forState:UIControlStateNormal]; // watermelon dark
+=======
+>>>>>>> updatesbuttons
     [_cancelTextButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     // Added by mbecker: Set background to clear
     [_cancelTextButton setBackgroundColor:[UIColor clearColor]];
+    
+    // Updated by mbecker: COLOR
+    [_cancelTextButton setTitleColor:[UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00] forState:UIControlStateNormal];
+    
     [self addSubview:_cancelTextButton];
+    
+    
+    /* Cancel Icon Button */
     
     _cancelIconButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [_cancelIconButton setImage:[TOCropToolbar cancelImage] forState:UIControlStateNormal];
@@ -133,30 +170,42 @@
     
     _clampButton = [UIButton buttonWithType:UIButtonTypeSystem];
     _clampButton.contentMode = UIViewContentModeCenter;
+<<<<<<< HEAD
     _clampButton.tintColor = [UIColor blackColor];
+=======
+>>>>>>> updatesbuttons
     [_clampButton setImage:[TOCropToolbar clampImage] forState:UIControlStateNormal];
     [_clampButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    // Added by mbecker: Set background to clear
+    // Added by mbecker: Updated colors
     [_clampButton setBackgroundColor:[UIColor clearColor]];
+    _clampButton.tintColor = [UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00];
     [self addSubview:_clampButton];
     
     _rotateCounterclockwiseButton = [UIButton buttonWithType:UIButtonTypeSystem];
     _rotateCounterclockwiseButton.contentMode = UIViewContentModeCenter;
+<<<<<<< HEAD
     _rotateCounterclockwiseButton.tintColor = [UIColor blackColor];
+=======
+>>>>>>> updatesbuttons
     [_rotateCounterclockwiseButton setImage:[TOCropToolbar rotateCCWImage] forState:UIControlStateNormal];
     [_rotateCounterclockwiseButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    // Added by mbecker: Set background to clear
+    // Added by mbecker: Updated colors
     [_rotateCounterclockwiseButton setBackgroundColor:[UIColor clearColor]];
+    _rotateCounterclockwiseButton.tintColor = [UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00];
     [self addSubview:_rotateCounterclockwiseButton];
     
     _resetButton = [UIButton buttonWithType:UIButtonTypeSystem];
     _resetButton.contentMode = UIViewContentModeCenter;
+<<<<<<< HEAD
     _resetButton.tintColor = [UIColor blackColor];
+=======
+>>>>>>> updatesbuttons
     _resetButton.enabled = NO;
     [_resetButton setImage:[TOCropToolbar resetImage] forState:UIControlStateNormal];
     [_resetButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    // Added by mbecker: Set background to clear
+    // Added by mbecker: Updated colors
     [_resetButton setBackgroundColor:[UIColor clearColor]];
+    _resetButton.tintColor = [UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00];
     [self addSubview:_resetButton];
 }
 
@@ -301,7 +350,8 @@
         button.frame = CGRectMake(button.frame.origin.x, button.frame.origin.y, button.frame.size.height, containerRect.size.height);
         CGRect buttonsbounds = button.bounds;
         CGFloat buttonBoundsheight  = CGRectGetHeight(button.bounds);
-        CGFloat fabs2 = fabs(CGRectGetHeight(containerRect)-buttonBoundsheight);
+        // Added mbecker: Center vertical '- button.frame.size.height / 2'
+        CGFloat fabs2 = fabs(CGRectGetHeight(containerRect)-buttonBoundsheight) - 3;
         CGFloat sameOffset = horizontally ? fabs2: fabs(CGRectGetWidth(containerRect)-CGRectGetWidth(button.bounds));
         CGFloat diffOffset = padding + i * (fixedSize + padding);
         CGPoint origin = horizontally ? CGPointMake(diffOffset, sameOffset) : CGPointMake(sameOffset, diffOffset);
@@ -597,9 +647,15 @@
     if (_rotateClockwiseButtonHidden == NO) {
         _rotateClockwiseButton = [UIButton buttonWithType:UIButtonTypeSystem];
         _rotateClockwiseButton.contentMode = UIViewContentModeCenter;
+<<<<<<< HEAD
         _rotateClockwiseButton.tintColor = [UIColor blackColor];
         // Added by mbecker: Set background to clear
+=======
+        // Added by mbecker: Updated colors
+>>>>>>> updatesbuttons
         [_rotateClockwiseButton setBackgroundColor:[UIColor clearColor]];
+        _rotateClockwiseButton.tintColor = [UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00];
+        
         [_rotateClockwiseButton setImage:[TOCropToolbar rotateCWImage] forState:UIControlStateNormal];
         [_rotateClockwiseButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_rotateClockwiseButton];

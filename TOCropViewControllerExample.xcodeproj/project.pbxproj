@@ -43,6 +43,18 @@
 		22DB4D9A1B234D07008B8466 /* TOCropToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DB4D931B234D07008B8466 /* TOCropToolbar.m */; };
 		22DB4D9B1B234D07008B8466 /* TOCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DB4D951B234D07008B8466 /* TOCropView.m */; };
 		22DB4D9E1B234D4F008B8466 /* TOActivityCroppedImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DB4D9D1B234D4F008B8466 /* TOActivityCroppedImageProvider.m */; };
+		D19B66D51DBCA9BE002307C7 /* ic_chevron_right_36pt.png in Resources */ = {isa = PBXBuildFile; fileRef = D19B66D21DBCA9BE002307C7 /* ic_chevron_right_36pt.png */; };
+		D19B66D61DBCA9BE002307C7 /* ic_chevron_right_36pt_3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D19B66D31DBCA9BE002307C7 /* ic_chevron_right_36pt_3x.png */; };
+		D19B66D71DBCA9BE002307C7 /* ic_chevron_right_36pt_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D19B66D41DBCA9BE002307C7 /* ic_chevron_right_36pt_2x.png */; };
+		D19B66D91DBCF9C7002307C7 /* ic_chevron_right_36pt.png in Resources */ = {isa = PBXBuildFile; fileRef = D19B66D21DBCA9BE002307C7 /* ic_chevron_right_36pt.png */; };
+		D19B66DA1DBCF9C7002307C7 /* ic_chevron_right_36pt.png in Resources */ = {isa = PBXBuildFile; fileRef = D19B66D21DBCA9BE002307C7 /* ic_chevron_right_36pt.png */; };
+		D19B66DB1DBCF9CA002307C7 /* ic_chevron_right_36pt_3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D19B66D31DBCA9BE002307C7 /* ic_chevron_right_36pt_3x.png */; };
+		D19B66DC1DBCF9CB002307C7 /* ic_chevron_right_36pt_3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D19B66D31DBCA9BE002307C7 /* ic_chevron_right_36pt_3x.png */; };
+		D19B66DD1DBCF9CE002307C7 /* ic_chevron_right_36pt_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D19B66D41DBCA9BE002307C7 /* ic_chevron_right_36pt_2x.png */; };
+		D19B66DE1DBCF9CF002307C7 /* ic_chevron_right_36pt_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D19B66D41DBCA9BE002307C7 /* ic_chevron_right_36pt_2x.png */; };
+		D19B66E01DBCFA74002307C7 /* Images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D19B66DF1DBCFA74002307C7 /* Images.bundle */; };
+		D19B66E11DBCFB4F002307C7 /* Images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D19B66DF1DBCFA74002307C7 /* Images.bundle */; };
+		D19B66E21DBCFB50002307C7 /* Images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D19B66DF1DBCFA74002307C7 /* Images.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +121,10 @@
 		6AE313511C47DAA200894C5B /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/TOCropViewControllerLocalizable.strings; sourceTree = "<group>"; };
 		CDC8C5751C667B9100BB86A4 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Main.strings; sourceTree = "<group>"; };
 		CDC8C5771C667B9100BB86A4 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/TOCropViewControllerLocalizable.strings; sourceTree = "<group>"; };
+		D19B66D21DBCA9BE002307C7 /* ic_chevron_right_36pt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_chevron_right_36pt.png; sourceTree = "<group>"; };
+		D19B66D31DBCA9BE002307C7 /* ic_chevron_right_36pt_3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_chevron_right_36pt_3x.png; sourceTree = "<group>"; };
+		D19B66D41DBCA9BE002307C7 /* ic_chevron_right_36pt_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_chevron_right_36pt_2x.png; sourceTree = "<group>"; };
+		D19B66DF1DBCFA74002307C7 /* Images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Images.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +155,7 @@
 		144B8CCA1D22CAFF0085D774 /* TOCropViewController */ = {
 			isa = PBXGroup;
 			children = (
+				D19B66D11DBCA9B2002307C7 /* Images */,
 				22DB4D881B234D07008B8466 /* Models */,
 				22DB4D8D1B234D07008B8466 /* Views */,
 				144B8CE31D22CE0D0085D774 /* TOCropViewController.h */,
@@ -146,6 +163,7 @@
 				22C3C5491AC8CA0D00E86280 /* TOCropViewControllerLocalizable.strings */,
 				2271B63D1DAAB59600AA147F /* TOCropViewController-Bridging-Header.h */,
 				146EFFB51D243822006CE3A0 /* Info.plist */,
+				D19B66DF1DBCFA74002307C7 /* Images.bundle */,
 			);
 			path = TOCropViewController;
 			sourceTree = "<group>";
@@ -239,6 +257,16 @@
 				22DB4D951B234D07008B8466 /* TOCropView.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D19B66D11DBCA9B2002307C7 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				D19B66D21DBCA9BE002307C7 /* ic_chevron_right_36pt.png */,
+				D19B66D31DBCA9BE002307C7 /* ic_chevron_right_36pt_3x.png */,
+				D19B66D41DBCA9BE002307C7 /* ic_chevron_right_36pt_2x.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -381,6 +409,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D19B66D71DBCA9BE002307C7 /* ic_chevron_right_36pt_2x.png in Resources */,
+				D19B66D51DBCA9BE002307C7 /* ic_chevron_right_36pt.png in Resources */,
+				D19B66E01DBCFA74002307C7 /* Images.bundle in Resources */,
+				D19B66D61DBCA9BE002307C7 /* ic_chevron_right_36pt_3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +420,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D19B66DB1DBCF9CA002307C7 /* ic_chevron_right_36pt_3x.png in Resources */,
+				D19B66DA1DBCF9C7002307C7 /* ic_chevron_right_36pt.png in Resources */,
+				D19B66DD1DBCF9CE002307C7 /* ic_chevron_right_36pt_2x.png in Resources */,
+				D19B66E21DBCFB50002307C7 /* Images.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,7 +432,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				223424791ABBC0CD00BBC2B1 /* Main.storyboard in Resources */,
+				D19B66DE1DBCF9CF002307C7 /* ic_chevron_right_36pt_2x.png in Resources */,
 				2234247E1ABBC0CD00BBC2B1 /* LaunchScreen.xib in Resources */,
+				D19B66E11DBCFB4F002307C7 /* Images.bundle in Resources */,
+				D19B66DC1DBCF9CB002307C7 /* ic_chevron_right_36pt_3x.png in Resources */,
+				D19B66D91DBCF9C7002307C7 /* ic_chevron_right_36pt.png in Resources */,
 				2234247B1ABBC0CD00BBC2B1 /* Images.xcassets in Resources */,
 				22C3C5471AC8CA0D00E86280 /* TOCropViewControllerLocalizable.strings in Resources */,
 			);
@@ -684,6 +724,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ZQ2XB9365U;
@@ -704,6 +745,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ZQ2XB9365U;
