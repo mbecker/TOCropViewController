@@ -695,7 +695,7 @@
     }
     
     if (self.navigationController) {
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:NO];
     }
     else {
         self.modalTransitionStyle = UIModalTransitionStyleCoverVertical;

@@ -107,14 +107,24 @@
     
     _doneTextButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [_doneTextButton.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:16]];
-    [_doneTextButton setTitle:NSLocalizedStringFromTableInBundle(@"Details", @"TOCropViewControllerLocalizable", resourceBundle, nil) forState:UIControlStateNormal];
+    [_doneTextButton setTitle:NSLocalizedStringFromTableInBundle(@"Next", @"TOCropViewControllerLocalizable", resourceBundle, nil) forState:UIControlStateNormal];
     [_doneTextButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [_doneTextButton setBackgroundColor:[UIColor clearColor]]; // Added by mbecker: Updated color & Add image
     [_doneTextButton setTitleColor:[UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00] forState:UIControlStateNormal]; // Added by mbecker: Updated color & Add image
     UIImage *btnImage = [TOCropToolbar loadImageFromResourceBundle:@"ic_chevron_right_36pt"]; // Added by mbecker: Updated color & Add image
     [_doneTextButton setImage:btnImage forState:UIControlStateNormal]; // Added by mbecker: Updated color & Add image
-    [_doneTextButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -80, 0, 0)]; // Added by mbecker: Updated color & Add image
-    [_doneTextButton setImageEdgeInsets:UIEdgeInsetsMake(0, 30, 0, 0)]; // Added by mbecker: Updated color & Add image
+//    [_doneTextButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, _doneTextButton.imageView.frame.size.width + 20)]; // Added by mbecker: Updated color & Add image
+//    [_doneTextButton setImageEdgeInsets:UIEdgeInsetsMake(0, _doneTextButton.titleLabel.frame.size.width + 20, 0, -_doneTextButton.titleLabel.frame.size.width)]; // Added by mbecker: Updated color & Add image
+    
+    _doneTextButton.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    _doneTextButton.titleLabel.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    _doneTextButton.imageView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    
+//    button.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, (button.imageView?.frame.size.width)!);
+//    button.imageEdgeInsets = UIEdgeInsetsMake(0, (button.titleLabel?.frame.size.width)! + 20, 0, -(button.titleLabel?.frame.size.width)!);
+    
+    [_doneTextButton setBackgroundColor:[UIColor yellowColor]];
+    
     [self addSubview:_doneTextButton];
     
     
@@ -212,14 +222,14 @@
 #endif
     
     if (verticalLayout == NO) {
-        CGFloat insetPadding = 10.0f;
+        CGFloat insetPadding = 0;
         
         // Work out the cancel button frame
         CGRect frame = CGRectZero;
         frame.origin.y = self.statusBarVisible ? 20.0f : 0.0f;
         // Added by mbecker: Changed bottom height
         frame.size.height = 101.0f;
-        frame.size.width = [self.cancelTextButton.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:self.cancelTextButton.titleLabel.font}].width + 10;
+        frame.size.width = [self.cancelTextButton.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:self.cancelTextButton.titleLabel.font}].width + 70;
 
         //If normal layout, place on the left side, else place on the right
         if (self.reverseContentLayout == NO) {
@@ -231,7 +241,7 @@
         self.cancelTextButton.frame = frame;
         
         // Work out the Done button frame
-        frame.size.width = [self.doneTextButton.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:self.doneTextButton.titleLabel.font}].width + 10;
+        frame.size.width = [self.doneTextButton.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:self.doneTextButton.titleLabel.font}].width + 70;
         
         if (self.reverseContentLayout == NO) {
             frame.origin.x = boundsSize.width - (frame.size.width + insetPadding);
@@ -327,6 +337,9 @@
     
     for (NSInteger i = 0; i < count; i++) {
         UIView *button = buttons[i];
+        
+        button.backgroundColor = [UIColor greenColor];
+        
         button.frame = CGRectMake(button.frame.origin.x, button.frame.origin.y, button.frame.size.height, containerRect.size.height);
         CGRect buttonsbounds = button.bounds;
         CGFloat buttonBoundsheight  = CGRectGetHeight(button.bounds);
@@ -342,6 +355,8 @@
             origin.y += CGRectGetMinY(containerRect);
         }
         button.frame = (CGRect){origin, size};
+        NSLog(@"Button X: %f", button.frame.origin.x);
+        NSLog(@"Button WIDTH: %f", button.frame.size.width);
     }
 }
 
