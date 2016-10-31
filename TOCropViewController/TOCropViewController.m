@@ -124,12 +124,63 @@
     self.toolbar.rotateClockwiseButtonHidden = self.rotateClockwiseButtonHidden && !circularMode;
     
     self.transitioningDelegate = self;
-    self.view.backgroundColor = self.cropView.backgroundColor;
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    /**
+     * HEADER
+     */
+    /* Done Text Button */
+    NSAttributedString *attributedString =
+    [[NSAttributedString alloc]
+     initWithString: @"Crop your image"
+     attributes:
+     @{
+       NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:23],
+       NSForegroundColorAttributeName : [UIColor colorWithRed:0.24 green:0.24 blue:0.24 alpha:1.00], // Baltic Sea
+       NSKernAttributeName : @(0.6f)
+       }];
+    
+    UILabel *headerLabel = [[UILabel alloc] init];
+    [headerLabel setAttributedText:attributedString];
+    CGSize headersize = attributedString.size;
+    [headerLabel setFrame:CGRectMake(0, 0, headersize.width, 110)];
+    headerLabel.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:headerLabel];
+    [headerLabel setTranslatesAutoresizingMaskIntoConstraints: NO];
+    
+    UIView *seperator = [[UIView alloc] init];
+    seperator.backgroundColor = [UIColor colorWithRed:0.28 green:0.28 blue:0.28 alpha:1.00]; // Charcoal
+    [seperator setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.view addSubview:seperator];
+    
+    id topGuide = self.topLayoutGuide;
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings (seperator, topGuide);
+    [self.view addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat: @"V:[topGuide]-60-[seperator]"
+                                             options: 0
+                                             metrics: nil
+                                               views: viewsDictionary]];
+    
+    [headerLabel.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20].active = true;
+    [headerLabel.bottomAnchor constraintEqualToAnchor:seperator.topAnchor constant:-16].active = true;
+    
+    [seperator.leftAnchor constraintEqualToAnchor:headerLabel.leftAnchor].active = true;
+    [seperator.widthAnchor constraintEqualToConstant:80].active = true;
+    [seperator.heightAnchor constraintEqualToConstant:1].active = true;
+    
+    
+    
+    [self.view layoutSubviews]; // You must call this method here or the system raises an exception
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     
     if (animated) {
         self.inTransition = YES;
@@ -191,6 +242,7 @@
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
+
 #pragma mark - Status Bar -
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
@@ -203,26 +255,28 @@
 
 - (BOOL)prefersStatusBarHidden
 {
-    //If we belong to a UINavigationController, defer to its own status bar style
-    if (self.navigationController) {
-        return self.navigationController.prefersStatusBarHidden;
-    }
+//    //If we belong to a UINavigationController, defer to its own status bar style
+//    if (self.navigationController) {
+//        return self.navigationController.prefersStatusBarHidden;
+//    }
+//    
+//    //If our presenting controller has already hidden the status bar,
+//    //hide the status bar by default
+//    if (self.presentingViewController.prefersStatusBarHidden) {
+//        return YES;
+//    }
+//    
+//    BOOL hidden = YES;
+//    hidden = hidden && !(self.inTransition);          // Not currently in a presentation animation (Where removing the status bar would break the layout)
+//    hidden = hidden && !(self.view.superview == nil); // Not currently waiting to the added to a super view
     
-    //If our presenting controller has already hidden the status bar,
-    //hide the status bar by default
-    if (self.presentingViewController.prefersStatusBarHidden) {
-        return YES;
-    }
-    
-    BOOL hidden = YES;
-    hidden = hidden && !(self.inTransition);          // Not currently in a presentation animation (Where removing the status bar would break the layout)
-    hidden = hidden && !(self.view.superview == nil); // Not currently waiting to the added to a super view
-    
-    return hidden;
+    return YES;
 }
 
 - (CGRect)frameForToolBarWithVerticalLayout:(BOOL)verticalLayout
 {
+    // Bottom view height
+    CGFloat bottomHeight = 124.0f;
     CGRect frame = CGRectZero;
     if (!verticalLayout) {
         frame.origin.x = 0.0f;
@@ -235,14 +289,14 @@
         
         if (self.toolbarPosition == TOCropViewControllerToolbarPositionBottom) {
             // Added by mbecker: Changed Bottom Height
-            frame.origin.y = CGRectGetHeight(self.view.bounds) - 101.0f;
+            frame.origin.y = CGRectGetHeight(self.view.bounds) - bottomHeight;
         } else {
             frame.origin.y = 0;
         }
         
         frame.size.width = CGRectGetWidth(self.view.bounds);
         // Added by mbecker: Changed Bottom Height
-        frame.size.height = 101.0f;
+        frame.size.height = bottomHeight;
         
         // If the bar is at the top of the screen and the status bar is visible, account for the status bar height
         if (self.toolbarPosition == TOCropViewControllerToolbarPositionTop && self.prefersStatusBarHidden == NO) {
@@ -284,7 +338,7 @@
         }
 
         frame.size.width = CGRectGetWidth(bounds);
-        frame.size.height = CGRectGetHeight(bounds) - 44.0f;
+        frame.size.height = CGRectGetHeight(bounds);
     }
     
     return frame;

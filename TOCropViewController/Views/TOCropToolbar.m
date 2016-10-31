@@ -79,7 +79,7 @@
 
 - (void)setup {
     // Added by mbecker. Updated background color of bottom container
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor clearColor];
     //[UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00];
     
     _rotateClockwiseButtonHidden = YES;
@@ -107,9 +107,9 @@
      * StackView
      */
     
-    float bottomViewHeight = 101.0f;
+    float bottomViewHeight = 124.0f;
     float textButtonwidth = 100.0f;
-    double buttonWidth = 30;
+    double buttonWidth = 50;
     int numberOfButtons = 3;
     int paddingStackView = 5;
     
@@ -120,116 +120,151 @@
     stackView.spacing = (self.bounds.size.width - numberOfButtons * buttonWidth) / (numberOfButtons - 1);
     
     /* Done Text Button */
+    NSAttributedString *attributedString =
+    [[NSAttributedString alloc]
+     initWithString: NSLocalizedStringFromTableInBundle(@"Next", @"TOCropViewControllerLocalizable", resourceBundle, nil)
+     attributes:
+     @{
+       NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:19],
+       NSForegroundColorAttributeName : [UIColor whiteColor],
+       NSKernAttributeName : @(0.6f)
+       }];
     
-    _doneTextButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [_doneTextButton.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:16]];
-    [_doneTextButton setTitle:NSLocalizedStringFromTableInBundle(@"Next", @"TOCropViewControllerLocalizable", resourceBundle, nil) forState:UIControlStateNormal];
+    NSAttributedString *selectedAttributedString =
+    [[NSAttributedString alloc]
+     initWithString: NSLocalizedStringFromTableInBundle(@"Next", @"TOCropViewControllerLocalizable", resourceBundle, nil)
+     attributes:
+     @{
+       NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:19],
+       NSForegroundColorAttributeName : [UIColor colorWithHue:0.58 saturation:0.27 brightness:0.12 alpha:1.00], // Aztec black
+       NSKernAttributeName : @(0.6f)
+       }];
+    
+    _doneTextButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_doneTextButton setAttributedTitle:attributedString forState:UIControlStateNormal];
+    [_doneTextButton setAttributedTitle:selectedAttributedString forState:UIControlStateSelected];
+    [_doneTextButton setBackgroundColor:[UIColor colorWithHue:0.46 saturation:0.85 brightness:0.59 alpha:1.00]];
+    _doneTextButton.layer.borderWidth = 1;
+    _doneTextButton.layer.borderColor = [UIColor colorWithHue:0.46 saturation:0.85 brightness:0.59 alpha:1.00].CGColor;
+    
+    CGFloat buttonPaddingBottom = 16;
+    CGFloat buttonPaddingWidth = 32;
+    CGFloat buttonwidth = 108;
+    CGFloat buttonheight = 46.135;
+    _doneTextButton.layer.cornerRadius = buttonheight / 2;
+    
+    CGFloat posy = bottomViewHeight - buttonheight - buttonPaddingBottom;
+    CGFloat posx = [UIScreen mainScreen].bounds.size.width - buttonwidth - buttonPaddingWidth;
+    
+    _doneTextButton.frame = CGRectMake(posx, posy, buttonwidth, buttonheight);
+    
     [_doneTextButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    [_doneTextButton setBackgroundColor:[UIColor clearColor]]; // Added by mbecker: Updated color & Add image
-    [_doneTextButton setTitleColor:[UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00] forState:UIControlStateNormal]; // Added by mbecker: Updated color & Add image
-    UIImage *btnImage = [TOCropToolbar loadImageFromResourceBundle:@"ic_chevron_right_36pt"]; // Added by mbecker: Updated color & Add image
-    [_doneTextButton setImage:btnImage forState:UIControlStateNormal]; // Added by mbecker: Updated color & Add image
     
-    _doneTextButton.transform = CGAffineTransformMakeScale(-1.0, 1.0);
-    _doneTextButton.titleLabel.transform = CGAffineTransformMakeScale(-1.0, 1.0);
-    _doneTextButton.imageView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
-    
-    _doneTextButton.translatesAutoresizingMaskIntoConstraints = false;
-    _doneTextButton.backgroundColor = [UIColor clearColor];
     [self addSubview:_doneTextButton];
-    [_doneTextButton.heightAnchor constraintEqualToConstant:bottomViewHeight].active = true;
-    [_doneTextButton.widthAnchor constraintEqualToConstant:textButtonwidth].active = true;
-    [_doneTextButton.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = true;;
-    [_doneTextButton.rightAnchor constraintEqualToAnchor:self.rightAnchor].active = true;
     
-    /*
-     * Cancel Text Button 
+    /**
+     * Cancel Button
      */
+    /* Done Text Button */
+    NSAttributedString *cancelAttributedString =
+    [[NSAttributedString alloc]
+     initWithString: NSLocalizedStringFromTableInBundle(@"Back", @"TOCropViewControllerLocalizable", resourceBundle, nil)
+     attributes:
+     @{
+       NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:19],
+       NSForegroundColorAttributeName : [UIColor whiteColor],
+       NSKernAttributeName : @(0.6f)
+       }];
     
-    _cancelTextButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [_cancelTextButton.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:16]];
-    [_cancelTextButton setTitle:NSLocalizedStringFromTableInBundle(@"Back", @"TOCropViewControllerLocalizable", resourceBundle, nil) forState:UIControlStateNormal];
+    NSAttributedString *cancelSelectedAttributedString =
+    [[NSAttributedString alloc]
+     initWithString: NSLocalizedStringFromTableInBundle(@"Back", @"TOCropViewControllerLocalizable", resourceBundle, nil)
+     attributes:
+     @{
+       NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:19],
+       NSForegroundColorAttributeName : [UIColor colorWithHue:0.58 saturation:0.27 brightness:0.12 alpha:1.00], // Aztec black
+       NSKernAttributeName : @(0.6f)
+       }];
     
-    [_cancelTextButton setBackgroundColor:[UIColor clearColor]]; // Added by mbecker: Set background to clear
-    [_cancelTextButton setTitleColor:[UIColor colorWithRed:0.85 green:0.32 blue:0.36 alpha:1.00] forState:UIControlStateNormal]; // watermelon dark
-    [_cancelTextButton setTitleColor:[UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00] forState:UIControlStateNormal]; // Updated by mbecker: COLOR
+    _cancelTextButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_cancelTextButton setAttributedTitle:cancelAttributedString forState:UIControlStateNormal];
+    [_cancelTextButton setAttributedTitle:cancelSelectedAttributedString forState:UIControlStateSelected];
+    [_cancelTextButton setBackgroundColor:[UIColor colorWithHue:0.46 saturation:0.85 brightness:0.59 alpha:1.00]];
+    _cancelTextButton.layer.borderWidth = 1;
+    _cancelTextButton.layer.borderColor = [UIColor colorWithHue:0.46 saturation:0.85 brightness:0.59 alpha:1.00].CGColor;
+    
+    _cancelTextButton.layer.cornerRadius = buttonheight / 2;
+    
+    _cancelTextButton.frame = CGRectMake(buttonPaddingWidth, posy, buttonwidth, buttonheight);
     
     [_cancelTextButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     
     
-    _cancelTextButton.translatesAutoresizingMaskIntoConstraints = false;
-    
-    _cancelTextButton.backgroundColor = [UIColor clearColor];
-    
     [self addSubview:_cancelTextButton];
-    [_cancelTextButton.heightAnchor constraintEqualToConstant:bottomViewHeight].active = true;
-    [_cancelTextButton.widthAnchor constraintEqualToConstant:textButtonwidth].active = true;
-    [_cancelTextButton.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = true;;
-    [_cancelTextButton.leftAnchor constraintEqualToAnchor:self.leftAnchor].active = true;
+
     
     /*
      * Rotate counter clockwise button
      */
-    
     _rotateCounterclockwiseButton = [UIButton buttonWithType:UIButtonTypeSystem];
     _rotateCounterclockwiseButton.contentMode = UIViewContentModeCenter;
     [_rotateCounterclockwiseButton setImage:[TOCropToolbar rotateCCWImage] forState:UIControlStateNormal];
     [_rotateCounterclockwiseButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [_rotateCounterclockwiseButton setBackgroundColor:[UIColor clearColor]];
-    _rotateCounterclockwiseButton.tintColor = [UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00];
-    
-    [_rotateCounterclockwiseButton.heightAnchor constraintEqualToConstant:bottomViewHeight].active = true;
-    [_rotateCounterclockwiseButton.widthAnchor constraintEqualToConstant:buttonWidth].active = true;
-    
+    _rotateCounterclockwiseButton.tintColor = [UIColor colorWithHue:0.60 saturation:0.47 brightness:0.35 alpha:1.00];
     
     /*
      * Reset button
      */
-    
     _resetButton = [UIButton buttonWithType:UIButtonTypeSystem];
     _resetButton.contentMode = UIViewContentModeCenter;
-    
-    _resetButton.tintColor = [UIColor blackColor];
-    
+    _resetButton.tintColor = [UIColor yellowColor];
     _resetButton.enabled = NO;
     [_resetButton setImage:[TOCropToolbar resetImage] forState:UIControlStateNormal];
     [_resetButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    // Added by mbecker: Updated colors
+    _resetButton.tintColor = [UIColor colorWithHue:0.60 saturation:0.47 brightness:0.35 alpha:1.00];
     [_resetButton setBackgroundColor:[UIColor clearColor]];
-    _resetButton.tintColor = [UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00];
-    
-    [_resetButton.heightAnchor constraintEqualToConstant:bottomViewHeight].active = true;
-    [_resetButton.widthAnchor constraintEqualToConstant:buttonWidth].active = true;
     
     /*
      * Rotate clockwise button
      */
-    
     _rotateClockwiseButton = [UIButton buttonWithType:UIButtonTypeSystem];
     _rotateClockwiseButton.contentMode = UIViewContentModeCenter;
-    
-    _rotateClockwiseButton.tintColor = [UIColor blackColor];
-    
-    [_rotateClockwiseButton setBackgroundColor:[UIColor clearColor]];
-    _rotateClockwiseButton.tintColor = [UIColor colorWithRed:0.09 green:0.10 blue:0.12 alpha:1.00];
-    
     [_rotateClockwiseButton setImage:[TOCropToolbar rotateCWImage] forState:UIControlStateNormal];
     [_rotateClockwiseButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [_rotateClockwiseButton setBackgroundColor:[UIColor clearColor]];
+    _rotateClockwiseButton.tintColor = [UIColor colorWithHue:0.60 saturation:0.47 brightness:0.35 alpha:1.00];
     
-    [_rotateClockwiseButton.heightAnchor constraintEqualToConstant:bottomViewHeight].active = true;
-    [_rotateClockwiseButton.widthAnchor constraintEqualToConstant:buttonWidth].active = true;
-    
+    /**
+    * Stackview
+    */
     [stackView addArrangedSubview:_rotateCounterclockwiseButton];
     [stackView addArrangedSubview:_resetButton];
     [stackView addArrangedSubview:_rotateClockwiseButton];
     
     stackView.translatesAutoresizingMaskIntoConstraints = false;
+    [stackView setBackgroundColor:[UIColor orangeColor]];
     [self addSubview:stackView];
     
+    CGFloat stackViewHeight = bottomViewHeight - buttonheight - buttonPaddingBottom;
     [stackView.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-textButtonwidth-paddingStackView].active = true;
-    [stackView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = true;
+    [stackView.topAnchor constraintEqualToAnchor:self.topAnchor].active = true;
+    [stackView.heightAnchor constraintEqualToConstant:stackViewHeight].active = true;
     [stackView.leftAnchor constraintEqualToAnchor:self.leftAnchor constant:textButtonwidth+paddingStackView].active = true;
+    
+    [_rotateCounterclockwiseButton.widthAnchor constraintEqualToConstant:buttonWidth].active = true;
+    [_rotateCounterclockwiseButton.bottomAnchor constraintEqualToAnchor:stackView.bottomAnchor constant:0].active = true;
+    [_rotateCounterclockwiseButton.topAnchor constraintEqualToAnchor:stackView.topAnchor constant:0].active = true;
+    
+    [_resetButton.widthAnchor constraintEqualToConstant:buttonWidth].active = true;
+    [_resetButton.bottomAnchor constraintEqualToAnchor:stackView.bottomAnchor constant:0].active = true;
+    [_resetButton.topAnchor constraintEqualToAnchor:stackView.topAnchor constant:0].active = true;
+    
+    [_rotateClockwiseButton.widthAnchor constraintEqualToConstant:buttonWidth].active = true;
+    [_rotateClockwiseButton.bottomAnchor constraintEqualToAnchor:stackView.bottomAnchor constant:0].active = true;
+    [_rotateClockwiseButton.topAnchor constraintEqualToAnchor:stackView.topAnchor constant:0].active = true;
 }
+
 
 - (void)layoutSubviews
 {
@@ -549,7 +584,6 @@
         resetImage = UIGraphicsGetImageFromCurrentImageContext();
     }
     UIGraphicsEndImageContext();
-    
     return resetImage;
 }
 
